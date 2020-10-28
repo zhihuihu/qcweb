@@ -5,6 +5,7 @@ const userModel = require('../models/user');
 
 const userInst = qcweb.getInst(userModel);
 const idWorker = qcweb.idWorker;
+const common = qcweb.common;
 
 /* GET users listing. */
 router.get('/list', function(req, res, next) {
@@ -14,7 +15,7 @@ router.get('/list', function(req, res, next) {
 
 async function add(req,res){
   var { name,password } = req.body;
-  if(name == null || name == ''){
+  if(common.isEmpty(name)){
     res.send(data);
     return;
   }

@@ -1,3 +1,5 @@
+const common = require('./utils/common');
+
 let insts = new Map();
 
 /**
@@ -26,6 +28,7 @@ var qcweb = {
 	delInst: delInst, // 删除对象实例
   db: null, // 数据库DB
   idWorker: null, //生成ID实例
+  common: common, //common工具
 }
 
 module.exports = qcweb;
