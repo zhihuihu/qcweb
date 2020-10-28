@@ -24,6 +24,14 @@ class userModel extends baseModel{
     return result;
   }
 
+  async listCount(sql){
+
+  }
+
+  async list(sql){
+
+  }
+
 }
 
 module.exports = userModel;

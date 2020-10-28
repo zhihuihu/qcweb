@@ -13,8 +13,17 @@ function isEmpty(data){
   return false;
 }
 
+function responseMessage(data,code,codeMessage){
+  code = code || 0;
+  return {
+    code: code,
+    codeMessage: codeMessage,
+    data: data
+  }
+}
 var common = {
   isEmpty: isEmpty,
+  responseMessage: responseMessage,
 }
 
 module.exports = common;
