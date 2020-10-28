@@ -8,7 +8,7 @@ let insts = new Map();
  */
 function getInst(m, ...args) {
 	if (!insts.get(m)) {
-		insts.set(m, new m(args));
+		insts.set(m, new m(...args));
 	}
 	return insts.get(m);
 }
@@ -22,8 +22,10 @@ function delInst(m) {
 }
 
 var qcweb = {
-	getInst: getInst,
-	delInst: delInst,
+	getInst: getInst, // 获取对象实例
+	delInst: delInst, // 删除对象实例
+  db: null, // 数据库DB
+  idWorker: null, //生成ID实例
 }
 
 module.exports = qcweb;

@@ -4,6 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var config = require('./config.json');
+var dbModule = require('./utils/db');
+var qcweb = require('./qcweb');
+var snowflakeId = require('./utils/snowflakeId')
+
+qcweb.db = dbModule.connect(config.db);
+qcweb.idWorker = qcweb.getInst(snowflakeId,{mid: +new Date()})
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
