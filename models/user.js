@@ -1,4 +1,5 @@
 const baseModel = require('./base');
+const qcweb = require('../qcweb');
 
 class userModel extends baseModel{
 
@@ -24,12 +25,26 @@ class userModel extends baseModel{
     return result;
   }
 
-  async listCount(sql){
-
+  async listCount(name){
+  	var searchSql = "";
+  	if(!qcweb.common.isEmpty(name)){
+			searchSql = `and name like '%${name}%'`;
+		}
+		var sql = `select count(id) as c from user where 1=1 ${searchSql}`;
+		var result = await this.getAsync(sql);
+		return result.c;
   }
 
-  async list(sql){
-
+  async list(name,pageNum,pageSize){
+		var searchSql = "";
+		if(!qcweb.common.isEmpty(name)){
+			searchSql = `and name like '%${name}%'`;
+		}
+  	var limit = pageSize;
+  	var offset = (pageNum <= 1) ? 0 : (pageNum - 1)*pageSize;
+		var sql = `select id, name, password, salt, createTime from user where 1=1 ${searchSql} limit ${limit} offset ${offset}`;
+		var result = await this.allAsync(sql);
+		return result;
   }
 
 }

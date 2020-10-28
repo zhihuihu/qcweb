@@ -17,8 +17,57 @@ function connect(dbConfig){
   tableSqls.forEach(function(item,index,arr){
     createTable(db,item);
   })
+	initAsync(db);
   return db;
 }
+
+/**
+ * 初始化DB连接的异步方法
+ * @param db
+ */
+function initAsync(db){
+	var runAsync = function (sql){
+		var promise = new Promise(function(resolve, reject){
+			db.run(sql,function(err){
+				if(err == null){
+					resolve();
+				}else{
+					reject(err);
+				}
+			})
+		})
+		return promise;
+	}
+	var getAsync = function (sql){
+		var promise = new Promise(function(resolve, reject){
+			db.get(sql,function(err,data){
+				if(err == null){
+					resolve(data);
+				}else{
+					reject(err);
+				}
+			})
+		});
+		return promise;
+	}
+	var allAsync = function (sql){
+		var promise = new Promise(function(resolve, reject){
+			db.all(sql,function(err,data){
+				if(err == null){
+					resolve(data);
+				}else{
+					reject(err);
+				}
+			})
+		});
+		return promise;
+	}
+	db.runAsync = runAsync;
+	db.getAsync = getAsync;
+	db.allAsync = allAsync;
+}
+
+
 
 function createTable(db,sql){
   db.run(sql, function(err){
