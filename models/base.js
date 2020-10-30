@@ -9,9 +9,13 @@ class baseModel {
 		this.getAsync = qcweb.db.getAsync;
 		this.allAsync = qcweb.db.allAsync;
 	}
-	
+
   getName(){
     console.log("Model Class name")
+  }
+
+  getSchema(){
+    console.log("table describe name")
   }
 }
 module.exports = baseModel;

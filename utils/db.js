@@ -30,7 +30,7 @@ function initAsync(db){
 		var promise = new Promise(function(resolve, reject){
 			db.run(sql,function(err){
 				if(err == null){
-					resolve();
+					resolve(true);
 				}else{
 					reject(err);
 				}

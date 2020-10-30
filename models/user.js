@@ -7,6 +7,12 @@ class userModel extends baseModel{
     return "user";
   }
 
+  getSchema() {
+    return {
+
+    }
+  }
+
   async save(data){
     let saveData = {
       id: data.id,
@@ -14,7 +20,7 @@ class userModel extends baseModel{
       password: data.password,
       salt: data.salt,
     }
-    var sql = `insert into user(id, name, password, salt, createTime) values('${saveData.id}', '${saveData.name}', '${saveData.password}', '${saveData.salt}', '${new Date().toLocaleDateString()}')`;
+    var sql = `insert into user(id, name, password, salt, createTime) values('${saveData.id}', '${saveData.name}', '${saveData.password}', '${saveData.salt}', '${new Date().format("yyyy-MM-dd hh:mm:ss")}')`;
     var result = await this.runAsync(sql);
     return saveData;
   }
