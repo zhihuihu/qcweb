@@ -16,19 +16,22 @@ class historyModel extends baseModel{
   async add(data){
     let saveData = {
       id: data.id,
-      projectId: data.name,
-      projectName: data.workspace,
-      fileUrl: data.checkDir,
+      projectId: data.projectId,
+      projectName: data.projectName,
+      fileUrl: data.fileUrl,
       result: data.result,
+      operatorId: data.operatorId,
+      operator: data.operator,
+      describe: data.describe,
       createTime: new Date().format("yyyy-MM-dd hh:mm:ss"),
     }
-    let sql = `insert into history(id, projectId, projectName, fileUrl, result, createTime) values('${saveData.id}', '${saveData.projectId}', '${saveData.projectName}', '${saveData.fileUrl}', '${saveData.result}', '${saveData.createTime}')`;
+    let sql = `insert into history(id, projectId, projectName, fileUrl, result, operatorId, operator, describe, createTime) values('${saveData.id}', '${saveData.projectId}', '${saveData.projectName}', '${saveData.fileUrl}', '${saveData.result}', '${saveData.operatorId}', '${saveData.operator}', '${saveData.describe}','${saveData.createTime}')`;
     await this.runAsync(sql);
     return saveData;
   }
 
   async getById(id){
-    let sql = `select id, projectId, projectName, fileUrl, result, createTime from history where id='${id}'`;
+    let sql = `select id, projectId, projectName, fileUrl, result, operatorId, operator, describe, createTime from history where id='${id}'`;
     var result = await this.getAsync(sql);
     return result;
   }
@@ -43,14 +46,14 @@ class historyModel extends baseModel{
     return result.c;
   }
 
-  async list(projectId){
+  async list(projectId,pageNum,pageSize){
     var searchSql = "";
-    if(!qcweb.common.isEmpty(name)){
+    if(!qcweb.common.isEmpty(projectId)){
       searchSql = `and projectId = '${projectId}'`;
     }
     var limit = pageSize;
     var offset = (pageNum <= 1) ? 0 : (pageNum - 1)*pageSize;
-    var sql = `select id, projectId, projectName, fileUrl, result, createTime from history where 1=1 ${searchSql} limit ${limit} offset ${offset}`;
+    var sql = `select id, projectId, projectName, fileUrl, result, operatorId, operator, describe, createTime from history where 1=1 ${searchSql} order by createTime desc limit ${limit} offset ${offset}`;
     var result = await this.allAsync(sql);
     return result;
   }

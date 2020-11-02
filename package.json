@@ -6,6 +6,7 @@
     "start": "node ./bin/www dev"
   },
   "dependencies": {
+    "basic-auth": "^2.0.1",
     "compressing": "^1.5.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -14,6 +15,7 @@
     "morgan": "~1.9.1",
     "multer": "^1.4.2",
     "pug": "2.0.0-beta11",
-    "sqlite3": "^5.0.0"
+    "sqlite3": "^5.0.0",
+    "uuid": "^8.3.1"
   }
 }

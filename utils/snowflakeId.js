@@ -1,3 +1,4 @@
+var uuid = require('uuid');
 
 class snowflakeId {
   constructor(options) {
@@ -137,6 +138,10 @@ class snowflakeId {
     if (hexStr.substring(0, 2) === '0x') hexStr = hexStr.substring(2);
     hexStr = hexStr.toLowerCase();
     return this.convertBase(hexStr, 16, 10);
+  }
+
+  uuid(){
+    return uuid.v1();
   }
 }
 
