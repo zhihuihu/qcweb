@@ -48,17 +48,19 @@ async function newVersion(req, res){
     res.send(qcweb.common.responseMessage(null,1,"请选择文件"));
     return;
   }
-  if(!file.originalname.endsWith(".tar.gz")){
-    res.send(qcweb.common.responseMessage(null,1,"请上传后缀名未.tar.gz的文件"));
+  if(!file.originalname.endsWith(".zip")){
+    res.send(qcweb.common.responseMessage(null,1,"请上传后缀名为.zip的文件"));
     return;
   }
-  var desFile = config.deploy.hisWorkspace + project.folder + "-" + qcweb.idWorker.generate()+".tar.gz";
+  var desFile = config.deploy.hisWorkspace + project.folder + "-" + qcweb.idWorker.generate()+".zip";
   if(!fs.existsSync(config.deploy.hisWorkspace)){
     fs.mkdirSync(config.deploy.hisWorkspace);
   }
   fs.writeFileSync(desFile,file.buffer);
   // 解压文件并替换文件
-  await compressing.tgz.uncompress(desFile, project.workspace,{zipFileNameEncoding :"utf8"});
+  var tempFolder = project.folder + "-" + qcweb.idWorker.generate();
+  fs.mkdirSync(config.deploy.hisWorkspace + tempFolder);
+  await compressing.zip.uncompress(desFile, config.deploy.hisWorkspace + tempFolder,{zipFileNameEncoding :"utf8"});
   res.send(qcweb.common.responseMessage("更新成功"));
 }
 router.post('/newVersion', upload.any(), function(req,res,next){
