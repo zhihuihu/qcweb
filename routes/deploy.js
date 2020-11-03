@@ -15,8 +15,8 @@ var historyInst = qcweb.getInst(historyModel);
 var projectInst = qcweb.getInst(projectModel);
 var userInst = qcweb.getInst(userModel);
 
-async function list(req,res){
-  var { pageNum,pageSize,projectId } = req.param;
+async function list(projectId,req,res){
+  var { pageNum,pageSize } = req.param;
   pageNum = pageNum ? pageNum : 1;
   pageSize = pageSize ? pageSize : 10;
   if(qcweb.common.isEmpty(projectId)){
@@ -39,7 +39,9 @@ router.get('/list', function(req, res, next) {
     res.send('error auth');
     return;
   }
-  list(req,res)
+  var { name, pass } = credentials;
+  var projectId = name;
+  list(projectId,req,res)
     .then(function(data){
 
     })
@@ -49,15 +51,17 @@ router.get('/list', function(req, res, next) {
 });
 
 async function newVersion(req, res){
-  /*const credentials = basicAuth(req);
+  const credentials = basicAuth(req);
   if(!credentials){
     res.statusCode = 401;
     res.setHeader('WWW-Authenticate','Basic realm="example');
     res.send('go away');
     return;
   }
-  var { projectId, userId } = credentials;*/
-  var { projectId, userId, describe } = req.body;
+  var { name, pass } = credentials;
+  var projectId = name;
+  var userId = pass;
+  var { describe } = req.body;
   if(qcweb.common.isEmpty(projectId)){
     res.send(qcweb.common.responseMessage(null,1,"项目ID为空"));
     return;
@@ -121,7 +125,17 @@ router.post('/new', upload.any(), function(req,res,next){
 });
 
 async function rollback(req,res){
-  var { projectId, userId, historyId } = req.body;
+  const credentials = basicAuth(req);
+  if(!credentials){
+    res.statusCode = 401;
+    res.setHeader('WWW-Authenticate','Basic realm="example');
+    res.send('go away');
+    return;
+  }
+  var { name, pass } = credentials;
+  var projectId = name;
+  var userId = pass;
+  var { historyId } = req.body;
   if(qcweb.common.isEmpty(projectId) || qcweb.common.isEmpty(userId) || qcweb.common.isEmpty(historyId)){
     res.send(qcweb.common.responseMessage(null,1,"参数有误"));
     return;
