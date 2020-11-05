@@ -77,6 +77,7 @@ function copyFolder(from, to) {        // 复制文件夹到指定目录
 
 function responseMessage(data,code,codeMessage){
   code = code || 0;
+  codeMessage = codeMessage || 'SUCCESS';
   return {
     code: code,
     codeMessage: codeMessage,
