@@ -53,7 +53,7 @@ qcweb server-init
 
 #### 项目发布（客户端操作）
 
-```
+```shell script
 * projectId 项目ID
 * userId 用户ID
 * describe 更新描述
@@ -80,9 +80,9 @@ qcweb history "http://392508c2-f4b3-48b9-84cd-93b8891f19ec:9da39bcc-aba0-44e0-92
 * 66034f30-1cea-11eb-82d4-f7f22ce15ed0  superAdmin   2020-11-02 17:04:22   null
 * 389b5100-1cea-11eb-82d4-f7f22ce15ed0  superAdmin   2020-11-02 17:03:06   null
 
-* 回滚版本 qcweb deploy "http://<projectId>:<userId>@127.0.0.1:3000" "<historyId>"
+* 回滚版本 qcweb rollback "http://<projectId>:<userId>@127.0.0.1:3000" "<historyId>"
 # 如下 用上面得到的historyId即可使用
-qcweb history "http://392508c2-f4b3-48b9-84cd-93b8891f19ec:9da39bcc-aba0-44e0-927a-8f5feada0e13@127.0.0.1:3000" "6f790820-1cea-11eb-82d4-f7f22ce15ed0"
+qcweb rollback "http://392508c2-f4b3-48b9-84cd-93b8891f19ec:9da39bcc-aba0-44e0-927a-8f5feada0e13@127.0.0.1:3000" "6f790820-1cea-11eb-82d4-f7f22ce15ed0"
 
 ```
 
