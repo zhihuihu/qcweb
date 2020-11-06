@@ -1,4 +1,4 @@
-FROM huzhihui/node:v14.15.0
+FROM huzhihui/node:v12.19.0
 MAINTAINER huzhihui_c@qq.com
 
 COPY . /usr/local/server/app/
