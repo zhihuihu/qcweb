@@ -100,15 +100,17 @@ function mkdirPath(dirPath){
     }else{
       projectPath = tempDirArray[i];
     }
-    if (fs.existsSync(projectPath)) {
-      let tempstats = fs.statSync(projectPath);
-      if (!(tempstats.isDirectory())) {
-        console.error(projectPath+" is not a directory");
-        throw new Error(projectPath+" is not a directory");
+    if(projectPath !== ""){
+      if (fs.existsSync(projectPath)) {
+        let tempstats = fs.statSync(projectPath);
+        if (!(tempstats.isDirectory())) {
+          console.error(projectPath+" is not a directory");
+          throw new Error(projectPath+" is not a directory");
+        }
       }
-    }
-    else{
-      fs.mkdirSync(projectPath);
+      else{
+        fs.mkdirSync(projectPath);
+      }
     }
   }
   return projectPath;
