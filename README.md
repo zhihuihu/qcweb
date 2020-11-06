@@ -59,8 +59,10 @@ qcweb server-init
 * describe 更新描述
 * top 查看多少条
 * historyId 历史版本ID
+
+
 * 发布新版本 qcweb deploy "http://<projectId>:<userId>@127.0.0.1:3000" "<describe>"
-# 如下
+# 如下 会把项目根目录下面的 dist 文件夹压缩为 dist.zip 文件 ，然后上传到服务器完成项目更新
 qcweb deploy "http://392508c2-f4b3-48b9-84cd-93b8891f19ec:9da39bcc-aba0-44e0-927a-8f5feada0e13@127.0.0.1:3000" "测试脚手架"
 
 * 查看发布历史 qcweb deploy "http://<projectId>:<userId>@127.0.0.1:3000" "<top>"
