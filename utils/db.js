@@ -8,6 +8,7 @@ var fs = require('fs');
  */
 function connect(dbConfig){
   var { location, tableSqls } = dbConfig;
+  location = location.replace("\\", "/");
   var db = new sqlite3.Database(location);
   var exist = fs.existsSync(location);
   if(!exist){

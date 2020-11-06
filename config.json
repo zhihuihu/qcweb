@@ -1,7 +1,7 @@
 {
   "port": "3000",
   "db": {
-    "location": "E:\\workspace\\node\\qcweb.db",
+    "location": "E:/workspace/node/qcweb.db",
     "tableSqls": [
       "create table if not exists user(id TEXT PRIMARY KEY NOT NULL, name TEXT, password TEXT, salt TEXT, createTime TEXT);",
       "create table if not exists project(id TEXT PRIMARY KEY NOT NULL, name TEXT, describe TEXT, folder TEXT, workspace TEXT, checkDir TEXT, createTime TEXT);",
@@ -9,8 +9,8 @@
     ]
   },
   "deploy": {
-    "tempUpload": "E:\\workspace\\node\\temp\\",
-    "hisWorkspace": "E:\\workspace\\node\\deployHistory\\"
+    "tempUpload": "E:/workspace/node/temp/",
+    "hisWorkspace": "E:/workspace/node/deployHistory/"
   },
   "256AesKey": "RmSestsqqyl1JFfWGPQaSxBaSfxXfgYc",
   "users": [
@@ -25,10 +25,10 @@
   "projects": [
     {
       "id": "392508c2-f4b3-48b9-84cd-93b8891f19ec",
-      "name": "建新H5",
-      "describe": "建新H5",
-      "folder": "jx-h5",
-      "workspace": "E:\\temp\\",
+      "name": "公司官网",
+      "describe": "公司官网",
+      "folder": "home",
+      "workspace": "E:/temp/",
       "checkDir": "dist",
       "createTime": "2020-10-30 14:21:53"
     }
