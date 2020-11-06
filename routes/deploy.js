@@ -85,6 +85,9 @@ async function newVersion(req, res){
     res.send(qcweb.common.responseMessage(null,1,"请上传后缀名为.zip的文件"));
     return;
   }
+  if(!fs.existsSync(config.deploy.hisWorkspace)){
+    fs.mkdirSync(config.deploy.hisWorkspace,{recursive:true});
+  }
   var desFile = config.deploy.hisWorkspace + project.folder + "-" + qcweb.idWorker.generate()+".zip";
   if(!fs.existsSync(config.deploy.hisWorkspace)){
     fs.mkdirSync(config.deploy.hisWorkspace);
@@ -99,6 +102,9 @@ async function newVersion(req, res){
     qcweb.common.deleteFolder(tempWorkspace);
     res.send(qcweb.common.responseMessage(null,1,'文件校验失败'));
     return;
+  }
+  if(!fs.existsSync(project.workspace)){
+    fs.mkdirSync(project.workspace);
   }
   let projectWorkspace = project.workspace + project.folder;
   qcweb.common.deleteFolder(projectWorkspace + '/' + project.checkDir);
@@ -155,6 +161,9 @@ async function rollback(req,res){
     res.send(qcweb.common.responseMessage(null,1,"回滚历史版本号有误"));
     return;
   }
+  if(!fs.existsSync(config.deploy.hisWorkspace)){
+    fs.mkdirSync(config.deploy.hisWorkspace,{recursive:true});
+  }
   // 解压文件并替换文件
   var tempFolder = project.folder + "-" + qcweb.idWorker.generate();
   let tempWorkspace = config.deploy.hisWorkspace + tempFolder;
@@ -164,6 +173,9 @@ async function rollback(req,res){
     qcweb.common.deleteFolder(tempWorkspace);
     res.send(qcweb.common.responseMessage(null,1,'文件校验失败'));
     return;
+  }
+  if(!fs.existsSync(project.workspace)){
+    fs.mkdirSync(project.workspace);
   }
   let projectWorkspace = project.workspace + project.folder;
   qcweb.common.deleteFolder(projectWorkspace + '/' + project.checkDir);
