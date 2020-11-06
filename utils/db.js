@@ -1,5 +1,6 @@
 var sqlite3 = require('sqlite3').verbose();
 var fs = require('fs');
+var common = require('../utils/common');
 
 /**
  * 获取数据库连接
@@ -9,6 +10,7 @@ var fs = require('fs');
 function connect(dbConfig){
   var { location, tableSqls } = dbConfig;
   location = location.replace("\\", "/");
+  common.mkdirPath(location.substring(0,location.lastIndexOf("/")));
   var db = new sqlite3.Database(location);
   var exist = fs.existsSync(location);
   if(!exist){

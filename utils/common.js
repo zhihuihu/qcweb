@@ -84,11 +84,42 @@ function responseMessage(data,code,codeMessage){
     data: data
   }
 }
+
+/**
+ * 创建路径
+ * @param dirPath 必须是从根目录开始的路径
+ * @returns {string}
+ */
+function mkdirPath(dirPath){
+  dirPath = dirPath.replace("\\", "/");
+  let tempDirArray=dirPath.split('/');
+  let projectPath = "";
+  for (let i = 0; i < tempDirArray.length; i++) {
+    if(i !== 0){
+      projectPath = projectPath+'/'+tempDirArray[i];
+    }else{
+      projectPath = tempDirArray[i];
+    }
+    if (fs.existsSync(projectPath)) {
+      let tempstats = fs.statSync(projectPath);
+      if (!(tempstats.isDirectory())) {
+        console.error(projectPath+" is not a directory");
+        throw new Error(projectPath+" is not a directory");
+      }
+    }
+    else{
+      fs.mkdirSync(projectPath);
+    }
+  }
+  return projectPath;
+
+}
 var common = {
   isEmpty: isEmpty,
   responseMessage: responseMessage,
   deleteFolder: deleteFolder,
-  copyFolder: copyFolder
+  copyFolder: copyFolder,
+  mkdirPath: mkdirPath,
 }
 
 module.exports = common;
