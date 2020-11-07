@@ -1,5 +1,6 @@
-let util = require('util');
-let fs = require('fs');
+const util = require('util');
+const fs = require('fs');
+const path = require('path');
 
 Date.prototype.format = function(fmt) {
   var o = {
@@ -35,25 +36,21 @@ function isEmpty(data){
   return false;
 }
 
-
-function deleteFolder(path) {
-  var files = [];
-  if (fs.existsSync(path)) {
-    if (fs.statSync(path).isDirectory()) {
-      files = fs.readdirSync(path);
-      files.forEach(function (file, index) {
-        var curPath = path + "/" + file;
-        if (fs.statSync(curPath).isDirectory()) {
-          deleteFolder(curPath);
-        } else {
-          fs.unlinkSync(curPath);
-        }
-      });
-      fs.rmdirSync(path);
-    } else {
-      fs.unlinkSync(path);
-    }
-  }
+function deleteFolder(dirPath) {
+	if(fs.existsSync(dirPath)){
+		fs.readdirSync(dirPath).forEach(function (file) {
+			let curPath = path.join(dirPath, file);
+			if(fs.statSync(curPath).isDirectory()) {
+				//删除文件夹
+				deleteFolder(curPath);
+			} else {
+				//删除文件
+				fs.unlinkSync(curPath);
+			}
+		});
+		//删除当前文件夹
+		fs.rmdirSync(dirPath);
+	}
 }
 
 function copyFolder(from, to) {        // 复制文件夹到指定目录

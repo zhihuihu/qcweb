@@ -23,12 +23,12 @@ async function list(projectId,req,res){
     res.send(qcweb.common.responseMessage(null,1,"项目ID为空"));
     return;
   }
-  var count = await historyInst.listCount(projectId);
+  var count = historyInst.listCount(projectId);
   if(count <= 0){
-    res.send(qcweb.common.responseMessage({count:0}));
+    res.send(qcweb.common.responseMessage({list: [],count:0}));
     return;
   }
-  var list = await historyInst.list(projectId,pageNum,pageSize);
+  var list = historyInst.list(projectId,pageNum,pageSize);
   res.send(qcweb.common.responseMessage({list: list,count:count}));
 }
 router.get('/list', function(req, res, next) {
@@ -120,7 +120,7 @@ async function newVersion(req, res){
     "operator": user.name,
     "describe": describe,
   }
-  await historyInst.add(history);
+  historyInst.add(history);
   res.send(qcweb.common.responseMessage("更新成功"));
 }
 router.post('/new', upload.any(), function(req,res,next){
@@ -156,7 +156,7 @@ async function rollback(req,res){
     res.send(qcweb.common.responseMessage(null,1,"用户不存在"));
     return;
   }
-  var history = await historyInst.getById(historyId);
+  var history = historyInst.getById(historyId);
   if(!history || history.result !== 10){
     res.send(qcweb.common.responseMessage(null,1,"回滚历史版本号有误"));
     return;
@@ -185,7 +185,7 @@ async function rollback(req,res){
   history.operatorId = userId;
   history.operator = user.name;
   history.describe = "版本回滚-->" + history.describe;
-  await historyInst.add(history);
+  historyInst.add(history);
   res.send(qcweb.common.responseMessage("更新成功"));
 }
 router.post('/rollback', function(req,res,next){

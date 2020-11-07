@@ -4,10 +4,6 @@ const util = require('util')
 class baseModel {
   constructor() {
 		this.db = qcweb.db;
-		var that = this;
-		this.runAsync = qcweb.db.runAsync;
-		this.getAsync = qcweb.db.getAsync;
-		this.allAsync = qcweb.db.allAsync;
 	}
 
   getName(){

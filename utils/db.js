@@ -1,83 +1,33 @@
-var sqlite3 = require('sqlite3').verbose();
 var fs = require('fs');
 var common = require('../utils/common');
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
 
 /**
  * 获取数据库连接
  * @param dbConfig
- * @returns {sqlite3.Database}
+ * @returns {lowdb}
  */
 function connect(dbConfig){
   var { location, tableSqls } = dbConfig;
   location = location.replace("\\", "/");
   common.mkdirPath(location.substring(0,location.lastIndexOf("/")));
-  var db = new sqlite3.Database(location);
-  var exist = fs.existsSync(location);
-  if(!exist){
-    console.log("init database file");
-    fs.openSync(location,'w');
-  }
-  tableSqls.forEach(function(item,index,arr){
-    createTable(db,item);
-  })
-	initAsync(db);
+
+  // 判断文件是否存在
+	var exist = fs.existsSync(location);
+	if(!exist){
+		console.log("init database file");
+		fs.openSync(location,'w');
+	}
+
+	// 初始化连接
+	const adapter = new FileSync(location);
+	const db = low(adapter);
+	if(!exist){
+		db.defaults({ history: [] })
+			.write();
+	}
   return db;
-}
-
-/**
- * 初始化DB连接的异步方法
- * @param db
- */
-function initAsync(db){
-	var runAsync = function (sql){
-		var promise = new Promise(function(resolve, reject){
-			db.run(sql,function(err){
-				if(err == null){
-					resolve(true);
-				}else{
-					reject(err);
-				}
-			})
-		})
-		return promise;
-	}
-	var getAsync = function (sql){
-		var promise = new Promise(function(resolve, reject){
-			db.get(sql,function(err,data){
-				if(err == null){
-					resolve(data);
-				}else{
-					reject(err);
-				}
-			})
-		});
-		return promise;
-	}
-	var allAsync = function (sql){
-		var promise = new Promise(function(resolve, reject){
-			db.all(sql,function(err,data){
-				if(err == null){
-					resolve(data);
-				}else{
-					reject(err);
-				}
-			})
-		});
-		return promise;
-	}
-	db.runAsync = runAsync;
-	db.getAsync = getAsync;
-	db.allAsync = allAsync;
-}
-
-
-
-function createTable(db,sql){
-  db.run(sql, function(err){
-    if(null != err){
-      console.log("create table error:" + err)
-    }
-  });
 }
 
 module.exports = {
