@@ -35,6 +35,7 @@ projects #项目配置
   "folder": "test",//项目发布的文件夹
   "workspace": "E:\\temp\\",//项目发布的目录
   "checkDir": "dist",//项目更新需要检查的文件夹 比如我们上传的文件解压后必须有dist文件夹才能发布成功
+  "needCheckDir": false,//发布的时候是否直接把checkDir复制到根目录，如果是false则复制checkDir里面的内容到项目文件夹中，否则直接复制checkDir到文件夹中
   "createTime": "2020-10-30 14:21:53"//创建时间
 }
 

@@ -10,7 +10,7 @@
   "256AesKey": "RmSestsqqyl1JFfWGPQaSxBaSfxXfgYc",
   "users": [
     {
-      "id": "9da39bcc-aba0-44e0-927a-8f5feada0e13",
+      "id": "u-xxx",
       "name": "superAdmin",
       "password": "123456",
       "salt": "123456",
@@ -19,12 +19,13 @@
   ],
   "projects": [
     {
-      "id": "392508c2-f4b3-48b9-84cd-93b8891f19ec",
+      "id": "p-xxx",
       "name": "公司官网",
       "describe": "公司官网",
       "folder": "home",
       "workspace": "/alidata/view/",
       "checkDir": "dist",
+      "needCheckDir": false,
       "createTime": "2020-10-30 14:21:53"
     }
   ]
