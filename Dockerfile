@@ -6,7 +6,7 @@ COPY . /usr/local/server/app/
 WORKDIR /usr/local/server/app/
 
 RUN npm config set registry https://registry.npm.taobao.org
-RUN npm install --unsafe-perm
+RUN npm install
 
 EXPOSE 3000
 
