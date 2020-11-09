@@ -2,6 +2,7 @@
 
 ### 工具介绍
 qcweb 是一款快速部署前端网站的工具，认证采用了HTTP Basic 认证
+数据库使用的 lowdb json文件数据库
 所有的请求都需要带权限认证如以下URL
 `http://<projectId>:<userId>@127.0.0.1:3000`
 
