@@ -1,7 +1,7 @@
 {
   "port": "3000",
   "db": {
-    "location": "/usr/local/server/app/db/db.json"
+    "location": "/alidata/docker/qcweb/db/db.json"
   },
   "deploy": {
     "tempUpload": "/alidata/docker/qcweb/history/temp/",

@@ -7,10 +7,9 @@ services:
     image: "huzhihui/qcweb:1.0.0"
     container_name: qcweb
     volumes:
+      - "/alidata/docker/qcweb:/alidata/docker/qcweb"
       - "/alidata/docker/qcweb/config.json:/usr/local/server/app/config.json"
-      - "/alidata/docker/qcweb/db:/usr/local/server/app/db"
       - "/alidata/docker/qcweb/logs:/usr/local/logs"
-      - "/alidata/docker/qcweb/history:/alidata/docker/qcweb/history"
       - "/alidata/view:/alidata/view"
     ports:
       - "3000:3000"
