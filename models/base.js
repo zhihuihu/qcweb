@@ -1,5 +1,4 @@
 const qcweb = require('../qcweb');
-const util = require('util')
 
 class baseModel {
   constructor() {

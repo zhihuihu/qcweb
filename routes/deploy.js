@@ -107,8 +107,15 @@ async function newVersion(req, res){
     fs.mkdirSync(project.workspace);
   }
   let projectWorkspace = project.workspace + project.folder;
-  qcweb.common.deleteFolder(projectWorkspace + '/' + project.checkDir);
-  qcweb.common.copyFolder(tempWorkspace,projectWorkspace);
+  if(project.needCheckDir){
+    // 发布的根目录需要包含checkDir目录
+    qcweb.common.deleteFolder(projectWorkspace + '/' + project.checkDir);
+    qcweb.common.copyFolder(tempWorkspace,projectWorkspace);
+  }else{
+    // 发布的根目录不需要包含checkDir目录
+    qcweb.common.deleteFolder(projectWorkspace);
+    qcweb.common.copyFolder(tempWorkspace+ '/' + project.checkDir,projectWorkspace);
+  }
   qcweb.common.deleteFolder(tempWorkspace);
   var history = {
     "id": qcweb.idWorker.uuid(),
@@ -178,8 +185,15 @@ async function rollback(req,res){
     fs.mkdirSync(project.workspace);
   }
   let projectWorkspace = project.workspace + project.folder;
-  qcweb.common.deleteFolder(projectWorkspace + '/' + project.checkDir);
-  qcweb.common.copyFolder(tempWorkspace,projectWorkspace);
+  if(project.needCheckDir){
+    // 发布的根目录需要包含checkDir目录
+    qcweb.common.deleteFolder(projectWorkspace + '/' + project.checkDir);
+    qcweb.common.copyFolder(tempWorkspace,projectWorkspace);
+  }else{
+    // 发布的根目录不需要包含checkDir目录
+    qcweb.common.deleteFolder(projectWorkspace);
+    qcweb.common.copyFolder(tempWorkspace+ '/' + project.checkDir,projectWorkspace);
+  }
   qcweb.common.deleteFolder(tempWorkspace);
   history.id = qcweb.idWorker.uuid();
   history.operatorId = userId;

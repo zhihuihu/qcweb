@@ -1,5 +1,4 @@
 const baseModel = require('./base');
-const qcweb = require('../qcweb');
 const config = require('../config.json');
 
 class userModel extends baseModel{

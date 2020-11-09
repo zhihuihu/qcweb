@@ -6,6 +6,7 @@ services:
         ipv4_address: 172.18.0.20
     image: "huzhihui/qcweb:1.0.0"
     container_name: qcweb
+    restart: always
     volumes:
       - "/alidata/docker/qcweb:/alidata/docker/qcweb"
       - "/alidata/docker/qcweb/config.json:/usr/local/server/app/config.json"
