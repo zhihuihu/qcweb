@@ -1,12 +1,7 @@
 {
   "port": "3000",
   "db": {
-    "location": "E:/workspace/node/qcwebDb.json",
-    "tableSqls": [
-      "create table if not exists user(id TEXT PRIMARY KEY NOT NULL, name TEXT, password TEXT, salt TEXT, createTime TEXT);",
-      "create table if not exists project(id TEXT PRIMARY KEY NOT NULL, name TEXT, describe TEXT, folder TEXT, workspace TEXT, checkDir TEXT, createTime TEXT);",
-      "create table if not exists history(id TEXT PRIMARY KEY NOT NULL, projectId TEXT, projectName TEXT, fileUrl TEXT, result INTEGER, operatorId TEXT, operator TEXT, describe TEXT, createTime TEXT);"
-    ]
+    "location": "E:/workspace/node/qcwebDb.json"
   },
   "deploy": {
     "tempUpload": "E:/workspace/node/temp/",
