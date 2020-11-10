@@ -23,13 +23,18 @@ async function list(projectId,req,res){
     res.send(qcweb.common.responseMessage(null,1,"项目ID为空"));
     return;
   }
-  var count = historyInst.listCount(projectId);
+  const project = projectInst.getById(projectId);
+  if(!project){
+    res.send(qcweb.common.responseMessage(null,1,"项目不存在"));
+    return;
+  }
+  const count = historyInst.listCount(projectId);
   if(count <= 0){
     res.send(qcweb.common.responseMessage({list: [],count:0}));
     return;
   }
-  var list = historyInst.list(projectId,pageNum,pageSize);
-  res.send(qcweb.common.responseMessage({list: list,count:count}));
+  const list = historyInst.list(projectId,pageNum,pageSize);
+  res.send(qcweb.common.responseMessage({project: project, list: list,count:count}));
 }
 router.get('/list', function(req, res, next) {
   const credentials = basicAuth(req);
@@ -128,7 +133,7 @@ async function newVersion(req, res){
     "describe": describe,
   }
   historyInst.add(history);
-  res.send(qcweb.common.responseMessage("更新成功"));
+  res.send(qcweb.common.responseMessage(`[${project.name}]更新成功`));
 }
 router.post('/new', upload.any(), function(req,res,next){
   newVersion(req,res)
@@ -200,7 +205,7 @@ async function rollback(req,res){
   history.operator = user.name;
   history.describe = "版本回滚-->" + history.describe;
   historyInst.add(history);
-  res.send(qcweb.common.responseMessage("更新成功"));
+  res.send(qcweb.common.responseMessage(`[${project.name}]回滚更新成功`));
 }
 router.post('/rollback', function(req,res,next){
   rollback(req,res)
