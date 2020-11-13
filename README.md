@@ -16,7 +16,7 @@ qcweb 是一款快速部署前端网站的工具，认证采用了HTTP Basic 认
 ### 项目的配置文件位于项目根目录下的  config.json 文件
 ```
 port  #项目启动端口号
-db.location #项目使用的sqlite数据库存储位置，该文件存储发布历史记录信息
+db.location #lowdb json文件数据库地址，该文件存储发布历史记录信息
 deploy.tempUpload #发布时上传文件的临时保存目录 必须以/结尾
 deploy.hisWorkspace #发布项目后保存的历史上传版本包 必须以/结尾
 

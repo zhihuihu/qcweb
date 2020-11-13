@@ -30,7 +30,7 @@ async function list(projectId,req,res){
   }
   const count = historyInst.listCount(projectId);
   if(count <= 0){
-    res.send(qcweb.common.responseMessage({list: [],count:0}));
+    res.send(qcweb.common.responseMessage({project: project,list: [],count:0}));
     return;
   }
   const list = historyInst.list(projectId,pageNum,pageSize);
