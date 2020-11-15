@@ -3,6 +3,7 @@ const qcweb = require('../qcweb');
 class baseModel {
   constructor() {
 		this.db = qcweb.db;
+		this.config = qcweb.config
 	}
 
   getName(){

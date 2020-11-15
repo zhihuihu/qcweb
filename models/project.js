@@ -1,5 +1,4 @@
 const baseModel = require('./base');
-const config = require('../config.json');
 
 class projectModel extends baseModel{
 
@@ -13,7 +12,7 @@ class projectModel extends baseModel{
     }
   }
   getById(id){
-    let projects = config.projects;
+    let projects = this.config.projects;
     let result = null;
     projects.forEach(function(value){
       if(value.id === id){
@@ -25,7 +24,7 @@ class projectModel extends baseModel{
   }
 
   getByName(name){
-    let projects = config.projects;
+    let projects = this.config.projects;
     let result = null;
     projects.forEach(function(value){
       if(value.name === name){
@@ -37,7 +36,7 @@ class projectModel extends baseModel{
   }
 
   list(name){
-    let projects = config.projects;
+    let projects = this.config.projects;
     let results = [];
     projects.forEach(function(value){
       if(value.name === name){
