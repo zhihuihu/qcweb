@@ -13,7 +13,7 @@ qcweb 是一款快速部署前端网站的工具，认证采用了HTTP Basic 认
 #历史版本查看接口：`/deploy/list     查看发布历史
 ```
 
-### 项目的配置文件位于项目根目录下的  config.json 文件
+### 项目的配置文件位于项目同级的 qcwebConfig.json 或者根目录下的  config.json 文件
 ```
 port  #项目启动端口号
 db.location #lowdb json文件数据库地址，该文件存储发布历史记录信息
