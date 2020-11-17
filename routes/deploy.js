@@ -4,8 +4,9 @@ var router = express.Router();
 var multer  = require('multer')
 var qcweb = require('../qcweb');
 var historyModel = require('../models/history');
-var config = require('.././config.json');
 var projectModel = require('../models/project');
+
+var config = qcweb.config;
 const compressing = require('compressing');
 const basicAuth = require('basic-auth');
 const userModel = require('../models/user');
