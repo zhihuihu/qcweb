@@ -2,18 +2,29 @@
 
 ### 工具介绍
 qcweb 是一款快速部署前端网站的工具，认证采用了HTTP Basic 认证
-数据库使用的 lowdb json文件数据库
-所有的请求都需要带权限认证如以下URL
+
+数据库使用的 lowdb json文件数据库。
+
+工具分为服务端和客户端两部分
+
+#### 服务端
+* 采用express作为web框架实现http的服务端，接收需要发布的项目文件然后发布
+
+#### 客户端
+* 采用request发起http请求把项目dist文件夹打包压缩并上传到服务端进行项目迭代更新
+
+客户端所有的请求都需要带权限认证如以下URL
+
 `http://<projectId>:<userId>@127.0.0.1:3000`
 
-工具为外部提供了三个标准接口
+服务端为外部提供了三个标准接口
 ```
 #发布接口：/deploy/new   更新项目版本
 #回滚接口：/deploy/rollback      回滚项目版本
 #历史版本查看接口：`/deploy/list     查看发布历史
 ```
 
-### 项目的配置文件位于项目同级的 qcwebConfig.json 或者根目录下的  config.json 文件
+### 项目的配置文件位于项目同级的 qcwebConfig.json（优先采用该文件） 或者根目录下的  config.json 文件
 ```
 port  #项目启动端口号
 db.location #lowdb json文件数据库地址，该文件存储发布历史记录信息
