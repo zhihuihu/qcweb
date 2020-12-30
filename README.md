@@ -50,8 +50,9 @@ projects #项目配置 可以配置多个项目
   "needCheckDir": false,//发布的时候是否直接把checkDir复制到根目录，如果是false则复制checkDir里面的内容到项目文件夹中，否则直接复制checkDir到文件夹中
   "createTime": "2020-10-30 14:21:53"//创建时间
 }
-
-# 示例配置 sample-config.json
+```
+##### 示例配置 sample-config.json
+```
 {
   "port": "3000",
   "db": {
@@ -92,13 +93,16 @@ projects #项目配置 可以配置多个项目
 ```shell script
 # 安装脚手架
 npm install -g qcweb
-# 一、源码方式安装服务端 会在执行命令的文件夹下面生成 qcweb 文件夹
+```
+##### 一、源码方式安装服务端 会在执行命令的文件夹下面生成 qcweb 文件夹
+```
 qcweb server-init
 # 执行 npm install
 # 按照个人需求配置 config.json 文件
 # 执行 node ./bin/www 平台即可运行成功
-
-# 二、脚手架快速启动服务端
+```
+##### 二、脚手架快速启动服务端
+```
 qcweb server config.json #config.json文件是配置文件路径，可以是相对的也可以是绝对路径
 ```
 
