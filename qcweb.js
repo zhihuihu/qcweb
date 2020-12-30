@@ -32,7 +32,7 @@ function delInst(m) {
  * @returns {*}
  */
 function getConfig(config){
-  console.log("--find config file")
+  console.log("--find config file--")
   // 获取qcwebConfig.json文件内容
   const qcwebCOnfigPath = path.resolve(__dirname,"../qcwebConfig.json");
   let qcwebConfig = null;

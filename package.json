@@ -1,21 +1,33 @@
 {
   "name": "qcweb",
   "version": "1.0.0",
-  "private": true,
+  "description": "qcweb fast job",
+  "bin": {
+    "qcweb": "./bin/cli.js"
+  },
   "scripts": {
     "start": "node ./bin/www dev"
   },
   "dependencies": {
     "basic-auth": "^2.0.1",
+    "chalk": "^3.0.0",
+    "commander": "^4.1.1",
     "compressing": "^1.5.1",
     "cookie-parser": "~1.4.4",
+    "cross-spawn": "^7.0.1",
     "debug": "~2.6.9",
+    "download-git-repo": "^3.0.2",
     "express": "~4.16.1",
+    "handlebars": "^4.7.3",
     "http-errors": "~1.6.3",
+    "inquirer": "^7.0.4",
+    "log-symbols": "^3.0.0",
     "lowdb": "^1.0.0",
     "morgan": "~1.9.1",
     "multer": "^1.4.2",
-    "pug": "2.0.0-beta11",
+    "ora": "^4.0.3",
+    "pug": "^3.0.0",
+    "request": "^2.88.2",
     "uuid": "^8.3.1"
   }
 }

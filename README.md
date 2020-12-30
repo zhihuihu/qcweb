@@ -24,21 +24,22 @@ qcweb 是一款快速部署前端网站的工具，认证采用了HTTP Basic 认
 #历史版本查看接口：`/deploy/list     查看发布历史
 ```
 
-### 项目的配置文件位于项目同级的 qcwebConfig.json（优先采用该文件） 或者根目录下的  config.json 文件
+### 项目的配置文件位于项目同级的 qcwebConfig.json（优先采用该文件） 或者根目录下的  config.json 文件 或者使用 qcweb 脚手架启动服务端使用自定义位置的配置文件
 ```
+# 下面是配置文件说明
 port  #项目启动端口号
 db.location #lowdb json文件数据库地址，该文件存储发布历史记录信息
 deploy.tempUpload #发布时上传文件的临时保存目录 必须以/结尾
 deploy.hisWorkspace #发布项目后保存的历史上传版本包 必须以/结尾
 
-users #用户配置
+users #用户配置 可以配置多个用户
 {
   "id":"xxxx",//用户ID，必须唯一
   "name": "xxx",//用户名
   "createTime": "2020-10-30 14:21:53"//新增时间
 }
 
-projects #项目配置
+projects #项目配置 可以配置多个项目
 {
   "id": "392508c2-f4b3-48b9-84cd-93b8891f19ec",//项目ID
   "name": "测试项目",//项目名称
@@ -50,18 +51,55 @@ projects #项目配置
   "createTime": "2020-10-30 14:21:53"//创建时间
 }
 
+# 示例配置 sample-config.json
+{
+  "port": "3000",
+  "db": {
+    "location": "E:/workspace/node/qcwebDb.json"
+  },
+  "deploy": {
+    "tempUpload": "E:/workspace/node/temp/",
+    "hisWorkspace": "E:/workspace/node/deployHistory/"
+  },
+  "256AesKey": "RmSestsqqyl1JFfWGPQaSxBaSfxXfgYc",
+  "users": [
+    {
+      "id": "u-xxx",
+      "name": "superAdmin",
+      "password": "123456",
+      "salt": "123456",
+      "createTime": "2020-10-30 14:21:53"
+    }
+  ],
+  "projects": [
+    {
+      "id": "p-xxx",
+      "name": "公司官网",
+      "describe": "公司官网",
+      "folder": "home",
+      "workspace": "E:/temp/",
+      "checkDir": "dist",
+      "needCheckDir": false,
+      "createTime": "2020-10-30 14:21:53"
+    }
+  ]
+}
+
 ```
 
 #### 安装
-使用项目提供的工具 qcweb-cli 工具，部署 qcweb 平台是非常容易的
+使用项目提供的工具 qcweb 脚手架工具，部署 qcweb 平台是非常容易的 提供了两种方式部署、源码部署服务端和脚手架命令快速部署服务端
 ```shell script
 # 安装脚手架
-npm install -g qcweb-cli
-# 安装服务端 会在执行命令的文件夹下面生成 qcweb 文件夹
+npm install -g qcweb
+# 一、源码方式安装服务端 会在执行命令的文件夹下面生成 qcweb 文件夹
 qcweb server-init
 # 执行 npm install
 # 按照个人需求配置 config.json 文件
 # 执行 node ./bin/www 平台即可运行成功
+
+# 二、脚手架快速启动服务端
+qcweb server config.json #config.json文件是配置文件路径，可以是相对的也可以是绝对路径
 ```
 
 #### 项目发布（客户端操作）
