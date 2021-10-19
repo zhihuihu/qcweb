@@ -17,6 +17,8 @@
 
 	<modules>
 		<module>nise-common</module>
+		<module>nise-swagger-boot-starter</module>
+		<module>nise-i18n-starter</module>
 	</modules>
 
 	<properties>
@@ -26,6 +28,7 @@
 		<spring-boot.version>2.5.5</spring-boot.version>
 		<lombok.version>1.18.18</lombok.version>
 		<hutool.version>5.7.14</hutool.version>
+		<springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
 	</properties>
 
 	<dependencyManagement>
@@ -51,6 +54,13 @@
 				<groupId>cn.hutool</groupId>
 				<artifactId>hutool-all</artifactId>
 				<version>${hutool.version}</version>
+			</dependency>
+
+			<!--swagger3-->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-boot-starter</artifactId>
+				<version>${springfox-boot-starter.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
