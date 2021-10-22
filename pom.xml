@@ -71,6 +71,17 @@
 		</dependencies>
 	</dependencyManagement>
 
+	<distributionManagement>
+		<repository>
+			<id>nise-releases</id>
+			<url>http://nexus.cros.otoc.cn/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>nise-snapshots</id>
+			<url>http://nexus.cros.otoc.cn/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<build>
 		<plugins>
 			<plugin>
