@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.ObjectUtils;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -33,24 +34,31 @@ public class NiseSwaggerAutoConfiguration {
     }
 
     @Bean
-    public Docket createRestApi() {
+    public Docket createRestApi(SwaggerProperties swaggerProperties) {
+        // 参数校验
+        if(ObjectUtils.isEmpty(swaggerProperties.getApiBasePackage())){
+            throw new IllegalArgumentException("swagger-starter初始化失败，apiBasePackage参数为空");
+        }
+        if(ObjectUtils.isEmpty(swaggerProperties.getContact())){
+            throw new IllegalArgumentException("swagger-starter初始化失败，contact参数为空");
+        }
         // swagger设置，基本信息，要解析的接口及路径等
         return new Docket(DocumentationType.OAS_30)
-                .apiInfo(apiInfo())
+                .apiInfo(apiInfo(swaggerProperties))
                 .select()
                 // 设置通过什么方式定位需要自动生成文档的接口，这里定位方法上的@ApiOperation注解
-                .apis(RequestHandlerSelectors.basePackage(swaggerProperties().getApiBasePackage()))
+                .apis(RequestHandlerSelectors.basePackage(swaggerProperties.getApiBasePackage()))
                 // 接口URI路径设置，any是全路径，也可以通过PathSelectors.regex()正则匹配
                 .paths(PathSelectors.any())
                 .build();
     }
 
-    private ApiInfo apiInfo() {
+    private ApiInfo apiInfo(SwaggerProperties swaggerProperties) {
         return new ApiInfoBuilder()
-                .title(swaggerProperties().getTitle())
-                .description(swaggerProperties().getDescription())
-                .contact(new Contact(swaggerProperties().getContact().getUsername(), swaggerProperties().getContact().getWebsite(), swaggerProperties().getContact().getEmail()))
-                .version(swaggerProperties().getVersion())
+                .title(swaggerProperties.getTitle())
+                .description(swaggerProperties.getDescription())
+                .contact(new Contact(swaggerProperties.getContact().getUsername(), swaggerProperties.getContact().getWebsite(), swaggerProperties.getContact().getEmail()))
+                .version(swaggerProperties.getVersion())
                 .build();
     }
 

@@ -27,7 +27,7 @@ import java.util.Locale;
  * @version $ v 0.1 2021/10/19 21:55 huzhihui Exp $$
  */
 @Configuration
-@Import(value = {I18nUtils.class})
+@Import(value = {ValidatorConfiguration.class,I18nUtils.class})
 public class NiseI18nConfiguration {
 
     private static final Logger logger = LoggerFactory.getLogger(I18nMessageResourceAccessor.class);

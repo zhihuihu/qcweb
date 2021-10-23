@@ -19,23 +19,23 @@ public class SwaggerProperties {
     /** api的包路径 */
     private String apiBasePackage;
     /** 标题 */
-    private String title;
+    private String title = "nise";
     /** 描述 */
-    private String description;
+    private String description = "nise";
     /** 联系人 */
     private Contact contact;
     /** 版本 */
-    private String version;
+    private String version = "1.0.0";
 
     @Data
     public static class Contact{
 
         /** 用户名 */
-        private String username;
+        private String username = "nise user";
         /** 网站 */
-        private String website;
+        private String website = "https://github.com/zhihuihu/nise-parent";
         /** 电子邮箱 */
-        private String email;
+        private String email = "email@email.com";
 
     }
 
