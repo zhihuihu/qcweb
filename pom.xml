@@ -19,6 +19,7 @@
 		<module>nise-common</module>
 		<module>nise-swagger-boot-starter</module>
 		<module>nise-i18n-starter</module>
+		<module>nise-mybatis-plus-starter</module>
 	</modules>
 
 	<properties>
@@ -29,6 +30,7 @@
 		<lombok.version>1.18.18</lombok.version>
 		<hutool.version>5.7.14</hutool.version>
 		<springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
+		<mybatis-plus-boot-starter.version>3.4.3.4</mybatis-plus-boot-starter.version>
 	</properties>
 
 	<dependencyManagement>
@@ -42,6 +44,12 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-web</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-configuration-processor</artifactId>
 				<version>${spring-boot.version}</version>
 			</dependency>
 
@@ -67,6 +75,12 @@
 				<groupId>io.springfox</groupId>
 				<artifactId>springfox-boot-starter</artifactId>
 				<version>${springfox-boot-starter.version}</version>
+			</dependency>
+			<!--mybatis plus-->
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>${mybatis-plus-boot-starter.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
