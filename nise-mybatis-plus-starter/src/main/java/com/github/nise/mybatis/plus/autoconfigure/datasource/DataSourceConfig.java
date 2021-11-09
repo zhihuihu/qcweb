@@ -42,11 +42,11 @@ public class DataSourceConfig {
         config.setJdbcUrl(url);
         config.setUsername(username);
         config.setPassword(password);
-        /*config.setMinimumIdle(minimumIdle);
+        config.setMinimumIdle(minimumIdle);
         config.setMaximumPoolSize(maximumPoolSize);
         config.setConnectionTimeout(connectionTimeout);
         config.setMaxLifetime(maxLifetime);
-        config.setIdleTimeout(idleTimeout);*/
+        config.setIdleTimeout(idleTimeout);
 
         dataSource = new HikariDataSource(config);
         return dataSource;
