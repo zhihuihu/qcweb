@@ -5,7 +5,10 @@
 package com.github.nise.mybatis.plus.autoconfigure;
 
 import com.github.nise.mybatis.plus.autoconfigure.datasource.StartInitDataSourceInitializer;
+import com.github.nise.mybatis.plus.properties.NiseMybatisPlusProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -20,5 +23,10 @@ import org.springframework.context.annotation.Import;
 @Import(value = {StartInitDataSourceInitializer.class})
 public class NiseMybatisPlusAutoConfiguration {
 
+    @Bean
+    @ConfigurationProperties(prefix = "nise.mybatis-plus")
+    public NiseMybatisPlusProperties niseMybatisPlusProperties(){
+        return new NiseMybatisPlusProperties();
+    }
 
 }

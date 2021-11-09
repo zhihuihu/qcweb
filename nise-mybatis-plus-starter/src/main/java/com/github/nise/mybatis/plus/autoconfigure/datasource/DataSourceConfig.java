@@ -21,15 +21,15 @@ public class DataSourceConfig {
     private String username;
     @Value("${spring.datasource.password}")
     private String password;
-    @Value("${spring.datasource.hikari.maximumPoolSize}")
+    @Value("${spring.datasource.hikari.maximum-pool-size}")
     private int maximumPoolSize;
-    @Value("${spring.datasource.hikari.minimumIdle}")
+    @Value("${spring.datasource.hikari.minimum-idle}")
     private int minimumIdle;
-    @Value("${spring.datasource.hikari.idleTimeout}")
+    @Value("${spring.datasource.hikari.idle-timeout}")
     private int idleTimeout;
-    @Value("${spring.datasource.hikari.connectionTimeout}")
+    @Value("${spring.datasource.hikari.connection-timeout}")
     private int connectionTimeout;
-    @Value("${spring.datasource.hikari.maxLifetime}")
+    @Value("${spring.datasource.hikari.max-lifetime}")
     private int maxLifetime;
 
     private HikariDataSource dataSource;
@@ -42,11 +42,11 @@ public class DataSourceConfig {
         config.setJdbcUrl(url);
         config.setUsername(username);
         config.setPassword(password);
-        config.setMinimumIdle(minimumIdle);
+        /*config.setMinimumIdle(minimumIdle);
         config.setMaximumPoolSize(maximumPoolSize);
         config.setConnectionTimeout(connectionTimeout);
         config.setMaxLifetime(maxLifetime);
-        config.setIdleTimeout(idleTimeout);
+        config.setIdleTimeout(idleTimeout);*/
 
         dataSource = new HikariDataSource(config);
         return dataSource;

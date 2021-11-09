@@ -4,11 +4,13 @@
  */
 package com.github.nise.mybatis.plus.autoconfigure.datasource;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.github.nise.mybatis.plus.properties.NiseMybatisPlusProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
@@ -26,28 +28,23 @@ import javax.sql.DataSource;
 public class StartInitDataSourceInitializer {
 
     /**
-     * 构建Resource对象
-     */
-    @Value("classpath:sql/schema.sql")
-    private Resource schema;
-
-    /**
      * 自定义Bean实现业务的特殊需求
      * @param dataSource
      * @return
      */
     @Bean
-    public DataSourceInitializer dataSourceInitializer(final DataSource dataSource) {
+    public DataSourceInitializer dataSourceInitializer(final DataSource dataSource,final NiseMybatisPlusProperties niseMybatisPlusProperties) {
         final DataSourceInitializer initializer = new DataSourceInitializer();
         // 设置数据源
         initializer.setDataSource(dataSource);
-        initializer.setDatabasePopulator(databasePopulator());
+        initializer.setDatabasePopulator(databasePopulator(niseMybatisPlusProperties.getSingleSchema().getPath()));
         return initializer;
     }
 
-    private DatabasePopulator databasePopulator() {
+    private DatabasePopulator databasePopulator(String schemaPath) {
         final ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-        populator.addScripts(schema);
+        Resource resource = new ClassPathResource(schemaPath);
+        populator.addScripts(resource);
         return populator;
     }
 

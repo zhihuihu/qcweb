@@ -16,6 +16,8 @@ public class NiseMybatisPlusProperties {
 
     /** 是否开启 */
     private Boolean enabled;
+    /** 单数据源配置 */
+    private SingleSchema singleSchema;
 
     /**
      * 单数据库服务配置
