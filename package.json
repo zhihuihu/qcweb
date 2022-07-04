@@ -1,6 +1,6 @@
 {
   "name": "qcweb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "qcweb fast job",
   "bin": {
     "qcweb": "./bin/cli.js"
