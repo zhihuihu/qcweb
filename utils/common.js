@@ -36,20 +36,22 @@ function isEmpty(data){
   return false;
 }
 
-function deleteFolder(dirPath) {
+function deleteFolder(dirPath,includeCurrentEmptyFolder) {
 	if(fs.existsSync(dirPath)){
 		fs.readdirSync(dirPath).forEach(function (file) {
 			let curPath = path.join(dirPath, file);
 			if(fs.statSync(curPath).isDirectory()) {
 				//删除文件夹
-				deleteFolder(curPath);
+				deleteFolder(curPath,true);
 			} else {
 				//删除文件
 				fs.unlinkSync(curPath);
 			}
 		});
 		//删除当前文件夹
-		fs.rmdirSync(dirPath);
+        if(true === includeCurrentEmptyFolder){
+            fs.rmdirSync(dirPath);
+        }
 	}
 }
 
